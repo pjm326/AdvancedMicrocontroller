@@ -5,17 +5,16 @@
 
 module testbench();
 	
-	reg clk_50, clk_25, reset;
+	reg clk_50, reset;
     //outputs x_out,y_out,z_out
-    reg InitialX,InitialY,funct,InitialZ,delta,sigma,beta,rho;
+    reg InitialX,InitialY,InitialZ,delta,sigma,beta,rho;
 	
 	//reg [31:0] index;
-	wire signed [15:0]  testbench_out;
+	wire signed [26:0]  x_out,y_out,z_out;
 	
 	//Initialize clocks and index
 	initial begin
 		clk_50 = 1'b0;
-		clk_25 = 1'b0;
 		//index  = 32'd0;
 		//testbench_out = 15'd0 ;
 	end
@@ -25,12 +24,7 @@ module testbench();
 		#10
 		clk_50  = !clk_50;
 	end
-	
-	always begin
-		#20
-		clk_25  = !clk_25;
-	end
-	
+
 	//Intialize and drive signals
 	initial begin
 		reset  = 1'b1;
@@ -63,17 +57,19 @@ module testbench();
 
 	//Instantiation of Device Under Test
 	// hook up the sine wave generators
-integrator DUT   (.clk(clk_50), 
-                .reset(reset),
-		.x_out({18'h02000, 14'b0}), 
-		.y_out(8'd0),
-		.z_out(testbench_out),
-		.InitialX({18'h02000, 14'b0}), 
-		.InitialY(8'd0),
-		.InitialZ(testbench_out),
-		.delta(),
-.
-sigma,beta,rho
+integrator DUT   (
+		.clk(clk_50), 
+        .reset(reset),
+		.x_out(x_out), 
+		.y_out(y_out),
+		.z_out(z_out),
+		.InitialX(InitialX), 
+		.InitialY(InitialY),
+		.InitialZ(InitialZ),
+		.delta(delta),
+		.sigma(sigma),
+		.beta(beta),
+		.rho(rho)
 );
 
 //x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,sigma,beta,rho
