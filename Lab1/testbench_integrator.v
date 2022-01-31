@@ -7,7 +7,7 @@ module testbench();
 	
 	reg clk_50, reset;
     //outputs x_out,y_out,z_out
-    reg InitialX,InitialY,InitialZ,delta,sigma,beta,rho;
+    	reg [26:0] InitialX,InitialY,InitialZ,delta,sigma,beta,rho;
 	
 	//reg [31:0] index;
 	wire signed [26:0]  x_out,y_out,z_out;
@@ -27,9 +27,12 @@ module testbench();
 
 	//Intialize and drive signals
 	initial begin
+		reset = 1'b0;
+		#10
 		reset  = 1'b1;
-		#10 
+		#50 
 		reset  = 1'b0;
+		
 
 
         //dt = (1./256)
