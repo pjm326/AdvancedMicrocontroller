@@ -47,7 +47,7 @@ module testbench();
         // rho = 28.0
         //https://vha3.github.io/FixedPoint/FixedPoint.html
         //ints
-        InitialX =  -27'sb0000001_00000000000000000000;
+        InitialX =  -27'b0000001_00000000000000000000;
         InitialY = 27'b0000000_00011001100110011001;
         InitialZ = 27'b0011001_00000000000000000000;
         delta = 27'b0000000_00000001000000000000;

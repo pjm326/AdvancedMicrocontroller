@@ -81,6 +81,11 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
     //x(k+1) = x(k) + dt*x'(k)
     
     wire signed [26:0] add_x, add_y, add_z;
+    wire [26:0] x_w0,x_w1;
+    wire [26:0] y_w0,y_w1,y_w2;
+    wire [26:0] z_w0,z_w1;
+
+
     //need to optimize first
     //replace * with signed mult
     //Add delta (i.e. dt) 
@@ -100,20 +105,18 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
         //signed_mult K_M(v1xK_M, v1, 18'h10000);
 
         //X
-        wire [26:0] x_w0,x_w1;
+        
         signed_mult X_M0(x_w0,y_reg,delta); //y_reg*delta
         signed_mult X_M1(x_w1,x_reg,delta); //x_reg*delta
         signed_mult X_M2(add_x,x_w0-x_w1,sigma); //((y_reg*delta - x_reg*delta) * sigma )
         
         //Y
-        wire [26:0] y_w0,y_w1,y_w2;
         signed_mult Y_M0(y_w0,rho,delta); //rho*delta
         signed_mult Y_M1(y_w1,z_reg,delta); //z_reg*delta
         signed_mult Y_M2(y_w2,x_reg,y_w1); //x_reg*(rho*delta-z_reg*delta)
         assign add_y = y_w2-x_w0;//(x_reg*(rho*delta-z_reg*delta)-y_reg*delta)
 
         //Z
-        wire [26:0] z_w0,z_w1;
         signed_mult Z_M0(z_w0,x_reg,x_w0); //x_reg*(y_reg*delta)
         signed_mult Z_M1(z_w1,beta,y_w1); //beta*(z_reg*delta)
         assign add_z = z_w0 - z_w1;
