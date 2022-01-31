@@ -70,10 +70,7 @@ integrator DUT   (.clk(clk_50),
 		.z_out(testbench_out),
 		.InitialX({18'h02000, 14'b0}), 
 		.InitialY(8'd0),
-		.InitialZ(testbench_out),
-		.delta(),
-.
-sigma,beta,rho
+		.InitialZ(testbench_out)
 );
 
 //x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,sigma,beta,rho

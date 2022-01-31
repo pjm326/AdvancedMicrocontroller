@@ -3,11 +3,11 @@
 /////////////////////////////////////////////////
 //
 module integrator(x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,sigma,beta,rho);
-    output signed [26:0] x_out; 	//the state variable x
+	output signed [26:0] x_out; 	//the state variable x
     output signed [26:0] y_out;
     output signed [26:0] z_out;
 	//input signed [26:0] funct;     //the dV/dt function
-    input clk, reset;
+	input clk, reset;
     input signed [26:0] delta;
 
     input signed [26:0] InitialX;
@@ -90,7 +90,7 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
     //need to optimize first
     //replace * with signed mult
     //Add delta (i.e. dt) 
-    //always @(*) begin
+    always @(*) begin
         // assign add_x = (y_reg - x_reg)*sigma;
         // assign add_x = x_reg*(rho-z_reg)-y_reg;
         // assign add_z = x_reg*y_reg-beta*z_reg;
@@ -123,7 +123,7 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
         assign add_z = z_w0 - z_w1;
 
         
-    //end 
+    end 
         
     
 endmodule
