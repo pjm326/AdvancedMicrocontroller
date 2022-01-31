@@ -1,6 +1,7 @@
 //Change
 
 `timescale 1ns/1ns
+`include "Integrator.v"
 
 module testbench();
 	
@@ -46,13 +47,13 @@ module testbench();
         // rho = 28.0
         //https://vha3.github.io/FixedPoint/FixedPoint.html
         //ints
-        InitialX =  27'd0;
-        InitialY = 27'd0;
-        InitialZ = 27'd0;
-        delta = 27'd0;
-        sigma = 27'd0;
-        beta = 27'd0;
-        rho = 27'd0;
+        InitialX =  -27'sb0000001_00000000000000000000;
+        InitialY = 27'b0000000_00011001100110011001;
+        InitialZ = 27'b0011001_00000000000000000000;
+        delta = 27'b0000000_00000001000000000000;
+        sigma = 27'b0001010_00000000000000000000;
+        beta = 27'b0000010_10101010101010101010;
+        rho = 27'b0011100_00000000000000000000;
 	end
 	
 	// //Increment index
