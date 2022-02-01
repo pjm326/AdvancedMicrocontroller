@@ -43,13 +43,13 @@ module testbench();
         // beta = 8./3.
         // rho = 28.0
         //ints
-        InitialX =  -27'sb0000001_00000000000000000000;
-        InitialY = 27'b0000000_00011001100110011001;
-        InitialZ = 27'b0011001_00000000000000000000;
-        delta = 27'b0000000_00000001000000000000;
-        sigma = 27'b0001010_00000000000000000000;
-        beta = 27'b0000010_10101010101010101010;
-        rho = 27'b0011100_00000000000000000000;
+        //InitialX =  -27'sb0000001_00000000000000000000;
+        //InitialY = 27'b0000000_00011001100110011001;
+        //InitialZ = 27'b0011001_00000000000000000000;
+        //delta = 27'b0000000_00000001000000000000;
+        //sigma = 27'b0001010_00000000000000000000;
+        //beta = 27'b0000010_10101010101010101010;
+        //rho = 27'b0011100_00000000000000000000;
 	end
 	
 	// //Increment index
@@ -60,18 +60,19 @@ module testbench();
 	//Instantiation of Device Under Test
 	// hook up the sine wave generators
 integrator DUT   (
-		.clk(clk_50), 
-        .reset(reset),
+
 		.x_out(x_out), 
 		.y_out(y_out),
 		.z_out(z_out),
-		.InitialX(InitialX), 
-		.InitialY(InitialY),
-		.InitialZ(InitialZ),
-		.delta(delta),
-		.sigma(sigma),
-		.beta(beta),
-		.rho(rho)
+		.InitialX(-27'sb0000001_00000000000000000000), 
+		.InitialY(27'b0000000_00011001100110011001),
+		.InitialZ(27'b0011001_00000000000000000000),
+		.clk(clk_50), 
+        .reset(reset),
+		.delta(27'b0000000_00000001000000000000),
+		.sigma(27'b0001010_00000000000000000000),
+		.beta(27'b0000010_10101010101010101010),
+		.rho(27'b0011100_00000000000000000000)
 );
 
 //x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,sigma,beta,rho
