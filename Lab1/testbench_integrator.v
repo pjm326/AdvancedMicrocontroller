@@ -104,6 +104,8 @@ module integrator(x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,
     wire signed	[26:0] x_out, y_out, z_out, x_new, y_new, z_new  ;
     reg signed	[26:0] x_reg ,y_reg ,z_reg  ;
 
+	//hi
+
 	always @ (posedge clk) 
 	begin
         if (reset==1) begin
