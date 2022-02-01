@@ -100,6 +100,7 @@ module integrator(x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,
     //wire signed [26:0] InitialY = 
     //wire signed [26:0] InitialZ = 
     
+	wire signed [26:0] x_int_out, y_int_out, z_int_out;
     wire signed	[26:0] x_out, y_out, z_out, x_new, y_new, z_new  ;
     reg signed	[26:0] x_reg ,y_reg ,z_reg  ;
 
