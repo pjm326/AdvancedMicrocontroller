@@ -7,7 +7,7 @@ module testbench();
 	
 	reg clk_50, reset;
     //outputs x_out,y_out,z_out
-    	reg [26:0] InitialX,InitialY,InitialZ,delta,sigma,beta,rho;
+    reg signed [26:0] InitialX,InitialY,InitialZ,delta,sigma,beta,rho;
 	
 	//reg [31:0] index;
 	wire signed [26:0]  x_out,y_out,z_out;
