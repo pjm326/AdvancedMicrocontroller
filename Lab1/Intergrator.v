@@ -30,14 +30,14 @@ module integrator(x_out,y_out,z_out,InitialX,InitialY,InitialZ, clk,reset,delta,
 	always @ (posedge clk) 
 	begin
         if (reset==1) begin
-		x_reg <= InitialX ; // 
-            	y_reg <= InitialY ; //
-            	z_reg <= InitialZ ; //
+		    x_reg <= InitialX ; // 
+            y_reg <= InitialY ; //
+            z_reg <= InitialZ ; //
 		end
 	else begin
 	    	x_reg <= x_new ;
-            	y_reg <= y_new ;
-            	z_reg <= z_new ;
+            y_reg <= y_new ;
+            z_reg <= z_new ;
 		end
 	end    
     integration_logic int_logic(
@@ -81,7 +81,7 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
 
     //x(k+1) = x(k) + dt*x'(k)
     
-    wire signed [26:0] add_x, add_y, add_z;
+    //wire signed [26:0] add_x, add_y, add_z;
     wire signed	[26:0] x_w0,x_w1;
     wire signed [26:0] y_w0,y_w1,y_w2;
     wire signed [26:0] z_w0,z_w1;
@@ -109,18 +109,18 @@ module integration_logic(x_out, y_out, z_out, x_reg, y_reg, z_reg,delta, sigma, 
         
         signed_mult X_M0(.out(x_w0),.a(y_reg),.b(delta)); //y_reg*delta
         signed_mult X_M1(x_w1,x_reg,delta); //x_reg*delta
-        signed_mult X_M2(add_x,x_w0-x_w1,sigma); //((y_reg*delta - x_reg*delta) * sigma )
+        signed_mult X_M2(x_out,x_w0-x_w1,sigma); //((y_reg*delta - x_reg*delta) * sigma )
         
         //Y
         signed_mult Y_M0(y_w0,rho,delta); //rho*delta
         signed_mult Y_M1(y_w1,z_reg,delta); //z_reg*delta
         signed_mult Y_M2(y_w2,x_reg,y_w1); //x_reg*(rho*delta-z_reg*delta)
-        assign add_y = y_w2-x_w0;//(x_reg*(rho*delta-z_reg*delta)-y_reg*delta)
+        assign y_out = y_w2-x_w0;//(x_reg*(rho*delta-z_reg*delta)-y_reg*delta)
 
         //Z
         signed_mult Z_M0(z_w0,x_reg,x_w0); //x_reg*(y_reg*delta)
         signed_mult Z_M1(z_w1,beta,y_w1); //beta*(z_reg*delta)
-        assign add_z = z_w0 - z_w1;
+        assign z_out = z_w0 - z_w1;
 
         
     //end 
